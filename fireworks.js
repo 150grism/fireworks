@@ -7,6 +7,15 @@ canvas.height = 750; //window.innerHeight;
 var c = canvas.getContext('2d');
 var o;
 
+var rocketResistance = 0.963;
+var sparkResistance = 0.94;
+var gravity = 0.9999;
+var sparkOpacity = 0.95;
+var sparksNumber = [20, 25];
+var sparksSpeed = 25;
+var rocketSpeedRange = 15;
+var sparkRadiusRange = 1;
+
 const colors = [
   '#00E8D1',
   '#61FF00',
@@ -62,23 +71,26 @@ function animate() {
     rockets[o].life++;
 
     if (rockets[o].life === 100) {
-      for (let i = 0; i < 20; i++) {
-        for (let j = 0; j < 20; j++) {
-          sparks[o].push(new Fly(rockets[o].x, rockets[o].y, 25, Math.random() * (i / 20 * 360) + ((i + 1) / 20 * 360), Math.random() * (j / 20 * 360) + ((j + 1) / 20 * 360), 1, 1, rockets[o].color));
+      let sparkSNumber = Math.floor(Math.random() * (sparksNumber[1] - sparksNumber[0]) + sparksNumber[0]);
+      for (let i = 0; i < sparkSNumber; i++) {
+        for (let j = 0; j < sparkSNumber; j++) {
+          let sparkSAngleI = Math.random() * (360 / sparkSNumber) + (i / sparkSNumber * 360);
+          let sparkSAngleJ = Math.random() * (360 / sparkSNumber) + (j / sparkSNumber * 360);
+          sparks[o].push(new Fly(rockets[o].x, rockets[o].y, sparksSpeed, sparkSAngleI, sparkSAngleJ, Math.random() * sparkRadiusRange, 1, rockets[o].color));
           // console.log('angle ' + i / 20 * 360 + '; color:' + sparks[o][i].color);
         }
       }
       
     }
-    rockets[o].speed *= 0.963;
+    rockets[o].speed *= rocketResistance;
     // this.radius -= this.life * this.dy * 0.01;
 
     rockets[o].update();
     if (sparks[o].length > 0) {
-      rockets[o].gravity *= 0.9999;
+      rockets[o].gravity *= gravity;
       sparks[o].forEach(function(spark) {
-        spark.opacity > 0.01 ? spark.opacity -= 0.01 : spark.opacity > 0.005 ? spark.opacity -= 0.005 : spark.opacity = 0;
-        spark.speed *= 0.94;
+        spark.opacity *= sparkOpacity;
+        spark.speed *= sparkResistance;
         spark.speed = fuse(spark.speed, spark.angle, rockets[o].gravity, 90).speed;
         spark.angle = fuse(spark.speed, spark.angle, rockets[o].gravity, 90).angle;
         spark.update();
@@ -86,8 +98,8 @@ function animate() {
     }
     // console.log(o + ' ' + rockets.length);
     
-    // if (rockets[o].life === 200) {
-    //   console.log(gravity.length);
+    // if (rockets[o].life === 300) {
+    //   console.log(rockets.length);
     //   rockets.shift();
     //   o--;
     // }
@@ -138,7 +150,7 @@ button.onclick = function() {
     rockets.shift();
     o--;
   }
-  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (15) + 10, Math.random() * (-120) - 30, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id));
+  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, Math.random() * (-80) - 50, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id));
   console.log(rockets.length + ' id :' + rockets[rockets.length - 1].id);
   // console.log(rockets[o].gravity);
 };
