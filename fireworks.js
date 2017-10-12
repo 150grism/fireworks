@@ -8,12 +8,14 @@ var c = canvas.getContext('2d');
 var o;
 
 var rocketResistance = 0.963;
-var sparkResistance = 0.94;
-var startingGravity = 0.2;
-var gravity = 2;
-var sparkOpacity = 0.948;
+var sparkResistance = 0.99;
+var deltaSparkResistance = 0.00001;
+var startingGravity = 0.299;
+var gravity = 1.01;
+var maxGravity = 0.6;
+var sparkOpacity = 0.94;
 var sparksNumber = [10, 25];
-var sparksSpeed = 15;
+var sparksSpeed = 8;
 var rocketSpeedRange = 15;
 var sparkRadiusRange = 1;
 
@@ -97,12 +99,15 @@ function animate() {
 
     rockets[o].update();
     if (sparks[o].length > 0) {
-      rockets[o].gravity *= gravity;
+      // console.log(rockets[o].gravity);
+      // rockets[o].gravity < 0.5 ? rockets[o].gravity *= gravity : rockets[o].gravity = 0;
       sparks[o].forEach(function(spark) {
         spark.opacity *= sparkOpacity;
         spark.speed *= sparkResistance;
-        spark.speed = fuse(spark.speed, spark.angle, rockets[o].gravity, 90).speed;
-        spark.angle = fuse(spark.speed, spark.angle, rockets[o].gravity, 90).angle;
+        if (rockets[o].gravity < maxGravity) {
+          spark.speed = fuse(spark.speed, spark.angle, rockets[o].gravity, 90).speed;
+          spark.angle = fuse(spark.speed, spark.angle, rockets[o].gravity, 90).angle;
+        }
         spark.update();
       });
     }
