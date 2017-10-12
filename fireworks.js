@@ -9,12 +9,22 @@ var o;
 
 var rocketResistance = 0.963;
 var sparkResistance = 0.94;
-var gravity = 0.9999;
-var sparkOpacity = 0.95;
-var sparksNumber = [20, 25];
-var sparksSpeed = 25;
+var startingGravity = 0.2;
+var gravity = 2;
+var sparkOpacity = 0.948;
+var sparksNumber = [10, 25];
+var sparksSpeed = 15;
 var rocketSpeedRange = 15;
 var sparkRadiusRange = 1;
+
+// var rocketResistance = 0.963;
+// var sparkResistance = 0.94;
+// var gravity = 0.9999;
+// var sparkOpacity = 0.95;
+// var sparksNumber = [20, 25];
+// var sparksSpeed = 25;
+// var rocketSpeedRange = 15;
+// var sparkRadiusRange = 1;
 
 const colors = [
   '#00E8D1',
@@ -150,7 +160,7 @@ button.onclick = function() {
     rockets.shift();
     o--;
   }
-  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, Math.random() * (-80) - 50, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id));
+  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, Math.random() * (-80) - 50, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id, startingGravity));
   console.log(rockets.length + ' id :' + rockets[rockets.length - 1].id);
   // console.log(rockets[o].gravity);
 };
