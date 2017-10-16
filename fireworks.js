@@ -27,7 +27,7 @@ var sparksSpeed = 8;
 var rocketSpeedRange = 15;
 var sparkRadiusRange = 1;
 
-canvas.width < 500 ? angleRocket = 50 : angleRocket = 80;
+canvas.width < 500 ? angleRocket = 40 : angleRocket = 80;
 
 // var rocketResistance = 0.963;
 // var sparkResistance = 0.94;
