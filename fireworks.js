@@ -1,11 +1,21 @@
 var canvas = document.querySelector('canvas');
 var button = document.querySelector('button');
 
-canvas.width = 1000;//window.innerWidth;
-canvas.height = 750; //window.innerHeight;
+function Resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+};
+
+Resize();
+window.onresize = function() {
+  Resize();
+}
+
+// if (canvas.width < )
 
 var c = canvas.getContext('2d');
 var o;
+var angleRocket;
 
 var rocketResistance = 0.963;
 var sparkResistance = 0.99;
@@ -165,7 +175,7 @@ button.onclick = function() {
     rockets.shift();
     o--;
   }
-  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, Math.random() * (-80) - 50, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id, startingGravity));
+  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, angleRocket, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id, startingGravity));
   console.log(rockets.length + ' id :' + rockets[rockets.length - 1].id);
   // console.log(rockets[o].gravity);
 };
