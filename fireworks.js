@@ -11,11 +11,9 @@ window.onresize = function() {
   Resize();
 }
 
-// if (canvas.width < )
-
 var c = canvas.getContext('2d');
 var o;
-var angleRocket;
+var angleRocket = 80;
 
 var rocketResistance = 0.963;
 var sparkResistance = 0.99;
@@ -28,6 +26,8 @@ var sparksNumber = [10, 25];
 var sparksSpeed = 8;
 var rocketSpeedRange = 15;
 var sparkRadiusRange = 1;
+
+if (canvas.width < 500) {angleRocket = 50;}
 
 // var rocketResistance = 0.963;
 // var sparkResistance = 0.94;
@@ -175,7 +175,7 @@ button.onclick = function() {
     rockets.shift();
     o--;
   }
-  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, angleRocket, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id, startingGravity));
+  rockets.push(new Fly(canvas.width/2, canvas.height*0.9, Math.random() * (rocketSpeedRange) + 10, Math.random() * (-angleRocket) - (180 - angleRocket) / 2, 0, 1, 1, colors[Math.floor(Math.random() * colors.length)], id, startingGravity));
   console.log(rockets.length + ' id :' + rockets[rockets.length - 1].id);
   // console.log(rockets[o].gravity);
 };
