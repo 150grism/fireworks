@@ -82,6 +82,8 @@ class Fly {
 }
 
 function animate() {
+  // var t0 = performance.now();
+
   requestAnimationFrame(animate);
   c.globalAlpha = 1;
   c.fillStyle = 'rgba(0,0,0,0.3)';
@@ -93,6 +95,7 @@ function animate() {
     rockets[o].life++;
 
     if (rockets[o].life === 100) {
+      sparks[o] = [];
       let sparkSNumber = Math.floor(Math.random() * (sparksNumber[1] - sparksNumber[0]) + sparksNumber[0]);
       for (let i = 0; i < sparkSNumber; i++) {
         for (let j = 0; j < sparkSNumber; j++) {
@@ -100,6 +103,7 @@ function animate() {
           let sparkSAngleJ = Math.random() * (360 / sparkSNumber) + (j / sparkSNumber * 360);
           sparks[o].push(new Fly(rockets[o].x, rockets[o].y, sparksSpeed, sparkSAngleI, sparkSAngleJ, Math.random() * sparkRadiusRange, 1, rockets[o].color));
           // console.log('angle ' + i / 20 * 360 + '; color:' + sparks[o][i].color);
+          // console.log(sparks[o].length);
         }
       }
       
@@ -130,6 +134,9 @@ function animate() {
     // }
 
   }
+
+  // var t1 = performance.now();
+  // console.log("Call to doSomething took " + (t1 - t0).toFixed(2) + " milliseconds.");
 }
 
 function speedToXY(speed, angle, angleZ = 0) {
