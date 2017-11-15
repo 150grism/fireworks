@@ -173,3 +173,22 @@ button.onclick = function() {
 };
 
 animate();
+
+//выстреливаем три ракеты при загрузки страницы
+var hm = 0;
+var startingRocketsInteval = setInterval(() => {
+  //имитируем нажатие кнопки...
+  button.style.transform = "translateY(2px)";
+  //... и её последующее отжатие через 0.2 секунды
+  var buttonPressTimer = setInterval(() => {
+    button.removeAttribute("style");
+    clearInterval(buttonPressTimer);
+  }, 200);
+  
+  button.click();
+  
+  hm++;
+  if (hm === 3) {
+    clearInterval(startingRocketsInteval);
+  }
+}, 1000);
