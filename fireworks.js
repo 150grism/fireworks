@@ -175,7 +175,13 @@ button.onclick = function() {
 animate();
 
 //выстреливаем три ракеты при загрузки страницы
-var hm = 0;
+var hm = 0, rt = [];
+//если экран - мобильный телефон, то запускаем меньше ракет
+if (window.innerWidth <= 480) {
+  rt = [2,1000];
+} else {
+  rt = [10, 417];
+}
 var startingRocketsInteval = setInterval(() => {
   //имитируем нажатие кнопки...
   button.style.transform = "translateY(2px)";
@@ -188,7 +194,7 @@ var startingRocketsInteval = setInterval(() => {
   button.click();
   
   hm++;
-  if (hm === 3) {
+  if (hm === rt[0]) {
     clearInterval(startingRocketsInteval);
   }
-}, 1000);
+}, rt[1]);
