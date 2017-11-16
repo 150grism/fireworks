@@ -36,7 +36,7 @@ var rocketSpeedRange;
 //чтобы на телефоне не тормозило
 if (window.innerWidth <= 480) {
   sparksNumber = [13, 15];
-  sparkRadiusRange = 2;
+  sparkRadiusRange = 1.5;
 }
 
 //доступные цвета для ракет/искр
