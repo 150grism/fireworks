@@ -33,6 +33,12 @@ var allowedRockets = 10;
 var angleRocket;
 var rocketSpeedRange;
 
+//чтобы на телефоне не тормозило
+if (window.innerWidth <= 480) {
+  sparksNumber = [8, 10];
+  sparkRadiusRange = 3;
+}
+
 //доступные цвета для ракет/искр
 const colors = [
   '#00E8D1',
