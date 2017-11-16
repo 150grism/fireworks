@@ -35,7 +35,7 @@ var rocketSpeedRange;
 
 //чтобы на телефоне не тормозило
 if (window.innerWidth <= 480) {
-  sparksNumber = [8, 15];
+  sparksNumber = [13, 15];
   sparkRadiusRange = 2;
 }
 
