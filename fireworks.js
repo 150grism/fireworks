@@ -2,8 +2,8 @@ var canvas = document.querySelector('canvas');
 var button = document.querySelector('button');
 
 function Resize() {
-  canvas.width = window.innerWidth - 2;
-  canvas.height = window.innerHeight - 2;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   //от ширины канваса зависит угол, под которым вылетают ракеты
   canvas.width < 500 ? angleRocket = 40 : angleRocket = 80;
   //от высоты канваса зависит начальная скорость ракет
@@ -183,11 +183,7 @@ animate();
 //выстреливаем три ракеты при загрузке страницы
 var hm = 0, rt = [];
 //если экран - мобильный телефон, то запускаем меньше ракет с большим интервалом
-if (window.innerWidth <= 480) {
-  rt = [3, 500];
-} else {
-  rt = [10, 417];
-}
+(window.innerWidth <= 480) ? rt = 3 : rt = 10;
 var startingRocketsInteval = setInterval(() => {
   //имитируем нажатие кнопки...
   button.style.transform = "translateY(2px)";
@@ -200,7 +196,7 @@ var startingRocketsInteval = setInterval(() => {
   button.click();
   
   hm++;
-  if (hm === rt[0]) {
+  if (hm === rt) {
     clearInterval(startingRocketsInteval);
   }
-}, rt[1]);
+}, 215);
