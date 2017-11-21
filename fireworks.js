@@ -191,7 +191,7 @@ var startingRocketsInteval = setInterval(() => {
   var buttonPressTimer = setInterval(() => {
     button.removeAttribute("style");
     clearInterval(buttonPressTimer);
-  }, 200);
+  }, 100);
   
   button.click();
   
